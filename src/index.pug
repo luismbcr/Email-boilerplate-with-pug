@@ -1,0 +1,23 @@
+doctype html
+html
+    head
+        title Automate emails
+        style.
+            body{
+                text-align:center;
+            }
+            section{
+                min-width: 600px;
+                width: 960px;
+                margin: 0 auto;
+            }
+            ul{
+                display: inline-block;
+            }
+    body
+        h1 List of emails
+        section
+            ul
+                each val in links
+                    li
+                        a(href=val)=val
