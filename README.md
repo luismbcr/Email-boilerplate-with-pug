@@ -1,5 +1,5 @@
 # Email-generator-with-pug
-Email generator using pug for the structure taking advantage of  inheritance, variables and Modularization using includes. .
+Email generator using pug for the structure taking advantage of  inheritance, variables and Modularization using includes.
 
 ### Installation
 
@@ -18,7 +18,8 @@ $ npm start
 ### Reuse Reset Attributes
 
  Instead of hardcode  reusable attributes in each table use Reset Attributes defined in includes/general.pug
-**example with  border="0" cellspacing="0" cellpadding="0" **
+ 
+**example with  border="0" cellspacing="0" cellpadding="0"**
 ![cdac8d0d4877e407aa989709be2e514b.png](https://pictr.com/images/2017/03/27/cdac8d0d4877e407aa989709be2e514b.png)
 
 Add your own attributes and inherence reset attributes.
