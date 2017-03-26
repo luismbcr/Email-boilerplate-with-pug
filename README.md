@@ -10,7 +10,7 @@ $ npm install
 $ npm start
 ```
 
-### Steps for create new email
+### Steps to create new email
  
  - Create new folder inside src/emails with project name
  - Create the index.pug file and extend from desired layout.
@@ -23,6 +23,7 @@ $ npm start
 ![cdac8d0d4877e407aa989709be2e514b.png](https://pictr.com/images/2017/03/27/cdac8d0d4877e407aa989709be2e514b.png)
 
 Add your own attributes and inherence reset attributes.
+
 table(**ownattributes**)&attributes(tableAtt)  
 **Example**
 ![452bf9c68acd70bc5f00419a9b4baaaa.png](https://pictr.com/images/2017/03/27/452bf9c68acd70bc5f00419a9b4baaaa.png)
