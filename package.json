@@ -1,11 +1,12 @@
 {
-  "name": "email generator",
+  "name": "email-generator",
   "version": "1.0.0",
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp"
+    "start": "gulp",
+    "build": "gulp build"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "babel-core": "^6.24.0",
     "babel-preset-es2015": "^6.24.0",
     "browser-sync": "^2.18.8",
+    "del": "^2.2.2",
     "fs": "0.0.1-security",
     "gulp": "^3.9.1",
     "gulp-pug": "^3.3.0"

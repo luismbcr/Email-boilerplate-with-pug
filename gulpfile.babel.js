@@ -4,6 +4,7 @@ import gulp from 'gulp';
 import pug from 'gulp-pug';
 import browserSync from 'browser-sync';
 import fs from 'fs';
+import del from 'del';
 
 const reload = browserSync.reload;
 
@@ -26,7 +27,9 @@ gulp.task('pug', ()=>{
     .pipe(pug({}))
     .pipe(gulp.dest('dist/'))
 });
-
+gulp.task('clean',(cb)=>{
+     del.sync(['dist/'],cb);
+})
 gulp.task('server', ()=>{
     browserSync.init({
         server:{
@@ -41,5 +44,6 @@ gulp.task('server', ()=>{
     ]).on('change', reload);
 });
 
+gulp.task('build',['clean','index','images','pug']);
 
-gulp.task('default',['index','images','pug','server']);
+gulp.task('default',['clean','index','images','pug','server']);
