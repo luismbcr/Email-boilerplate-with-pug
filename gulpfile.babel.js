@@ -37,13 +37,10 @@ gulp.task('server', ()=>{
         }
     });
     gulp.watch(['src/includes/*','src/includes/**/*','src/layout/*.pug','src/index.pug','src/emails/**/*.pug'],['pug','index']);
-    gulp.watch('src/emails/**/img/*.',{cwd:'./'},['images']);
-    gulp.watch([
-    'dist/*.pug',
-    'dist/**/*'
-    ]).on('change', reload);
+    gulp.watch('src/emails/**/img/*',{cwd:'./'},['images']);
+    gulp.watch(['dist/*','dist/**/*']).on('change',reload);
 });
 
 gulp.task('build',['clean','index','images','pug']);
 
-gulp.task('default',['clean','index','images','pug','server']);
+gulp.task('default',['index','images','pug','server']);
