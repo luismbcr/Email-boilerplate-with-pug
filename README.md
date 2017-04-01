@@ -1,5 +1,5 @@
-# Email-generator-with-pug
-Email generator using pug for the structure taking advantage of  inheritance, variables and Modularization using includes.
+# Email-boilerplate-with-pug
+Email boilerplate developed with pug that take advantage of inheritance, variables and Modularization.
 
 ### Installation
 
