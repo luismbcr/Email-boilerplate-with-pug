@@ -22,11 +22,11 @@ block styles
         }     
 block content
     table(width='600' class="w480")&attributes(tableAtt)
+        +vSpacer(10)
+        //- instead of tr > td> img spacer, use mixin for Vertical Spacer
+        //-img(src='https://spacergif.org/spacer.gif' height="10px")
         tr
-            td
-                img(src='https://spacergif.org/spacer.gif' height="10px")
-        tr
-            td(width='600' style=`background: ${mainColor}; padding:10px; ` class="w480")&attributes(tdCenter)
+            td(width='600' style=`background: ${mainColor}; padding:10px;` class="w480")&attributes(tdCenter)
                 span(style=`color:${whiteText};font-size: 21px;font-weight: bold;display: block;`) New Offer Email
                 span(style=`color:${whiteText}; margin:0px;`) some example text
 
@@ -38,20 +38,22 @@ block content
                 //- img(src="http://lorempixel.com/600/200" alt="img" class="w480" width='600')
     table(width='600' style="color: white;background: #657084" class="w480")&attributes(tableAtt)
         tr
-            td(width="300" height="80" style="padding-top:15px;" class="blockwrap h60 ")&attributes(tdCenter)
+            td(width="300" height="80" style="padding:15px 0px 0px 0px;" class="blockwrap h60 ")&attributes(tdCenter)
                 span(style=`color:${whiteText};font-size: 21px;font-weight: bold;display: block;`) Best offers
                 span  We have the best offers for you!
-            td(width='300' height="80" style="padding-top:15px; " class="blockwrap h60 p0")&attributes(tdCenter)
+            td(width='300' height="80" style="padding:15px 0px 0px 0px; " class="blockwrap h60 p0")&attributes(tdCenter)
                 span(style=`color:${whiteText};font-size: 21px;font-weight: bold;display: block;`) Contact us
                 span Phone: +1 999 999 999
     table(width='600' style=`color: white;background: ${gray}` class="w480")&attributes(tableAtt)
         tr
-            td(width="300" height="80"  style="padding-top:15px;")&attributes(tdCenter)
+            td(width="300" height="80"  style="padding:15px 0px 0px 0px;")&attributes(tdCenter)
                 span(style=`color:${whiteText};font-size: 21px;font-weight: bold;display: block;`)  Latest Offer
                 span(style=`margin:0px; padding:5px;`) Get our last offer in our site
         tr
             td(width="300" height="100" style=" background-image:url(http://lorempixel.com/600/100/)")&attributes(tdCenter)
-                img(src='https://spacergif.org/spacer.gif' height="25px")
+                +spacer({height:25})
+                //- instead of img spacer, use text spacer
+                //- img(src='https://spacergif.org/spacer.gif' height="25px")
                 span(style=`color:${whiteText};font-size: 21px;font-weight: bold;display: block;`) "Visit offers site"
     include ../../includes/modules/footer.pug
 
