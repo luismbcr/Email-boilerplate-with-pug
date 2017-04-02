@@ -1,0 +1,5 @@
+//- Custom Mixins 
+
+mixin addImg(src,alt)
+    -var imgStyle = {'display': 'block', 'padding': '0', color:'#ffffff', 'font-family':'Helvetica, arial, sans-serif', 'font-size': '16px'}
+    img(src=src alt=alt border="0" style=imgStyle)&attributes(attributes)
