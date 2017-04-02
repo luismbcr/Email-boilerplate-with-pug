@@ -1,6 +1,8 @@
 //- Custom Mixins 
 
 mixin addImg(src,alt)
+    //- Check if  src has http or https in the URL
+    - src = (src.toLowerCase().indexOf('http')+1) ? src : imagePath+src
     -var imgStyle = {'display': 'block', 'padding': '0', color:'#ffffff', 'font-family':'Helvetica, arial, sans-serif', 'font-size': '16px'}
     img(src=src alt=alt border="0" style=imgStyle)&attributes(attributes)
 
