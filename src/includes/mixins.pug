@@ -15,3 +15,22 @@ mixin hSpacer(width)
 
 mixin spacer(size)
     span(style=`font-size:0px; width=${size.width ? size.width : 1}px; height:${size.height ? size.height: 1}px; line-height:${size.height ? size.height: 1}px;mso-line-height-rule:exactly;display:block;`)&attributes(attributes) &nbsp;
+
+//- params img,bgcolor, width, height
+mixin tdbackground(params)
+    //- Check if  img src has http or https in the URL
+    - params.img = (params.img.toLowerCase().indexOf('http')+1) ? params.img : imagePath+params.img
+    td(background=`${params.img ? params.img  :" "}` bgcolor=`${params.bgcolor ? params.bgcolor  :" "}` width=`${params.width ? params.width  :" "}` height=`${params.height ? params.height  :" "}` valign="top")&attributes(attributes)
+        <!--[if gte mso 9]>
+        <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style=`width:#{params.width ? params.width  :" "}px;height:#{params.height ? params.height  :" "}px;`>
+        <v:fill type="tile" src=`#{params.img ? params.img  :" "}` color=`#{params.bgcolor ? params.bgcolor  :" "}` />
+        <v:textbox inset="0,0,0,0">
+        <div>
+        <![endif]-->
+        if block
+            block
+        </div>
+        <!--[if gte mso 9]>
+        </v:textbox>
+        </v:rect>
+        <![endif]-->

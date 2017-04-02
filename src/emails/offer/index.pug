@@ -50,10 +50,8 @@ block content
                 span(style=`color:${whiteText};font-size: 21px;font-weight: bold;display: block;`)  Latest Offer
                 span(style=`margin:0px; padding:5px;`) Get our last offer in our site
         tr
-            td(width="300" height="100" style=" background-image:url(http://lorempixel.com/600/100/)")&attributes(tdCenter)
+            +tdbackground({img:'http://lorempixel.com/600/100/', width:600, height:100})&attributes(tdCenter)
                 +spacer({height:25})
-                //- instead of img spacer, use text spacer
-                //- img(src='https://spacergif.org/spacer.gif' height="25px")
                 span(style=`color:${whiteText};font-size: 21px;font-weight: bold;display: block;`) "Visit offers site"
     include ../../includes/modules/footer.pug
 
