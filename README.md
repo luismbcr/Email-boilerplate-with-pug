@@ -1,6 +1,10 @@
 # Email-boilerplate-with-pug
 Email boilerplate developed with pug that takes advantage of inheritance, variables and Modularization.
 
+
+----------
+
+
 ### Installation
 
 Install dependencies and start the server.
@@ -15,6 +19,11 @@ $ npm start
  - Create new folder inside src/emails with project name
  - Create the index.pug file and extend from desired layout.
  
+
+
+----------
+
+
 ### Reuse Reset Attributes
 
  Instead of hardcode reusable attributes in each table use Reset Attributes defined in includes/general.pug
@@ -80,13 +89,14 @@ This mixin takes advantage of alt text, and applies to alt text some styles, thi
 
     +addImg("http://lorempixel.com/600/200","Img main")(class="w480" width='600')
 
-
-
+----------
 ### Modularization
 You could develop modules inside includes/modules.
 **Example in emails folder:**
 ![7d33d1fae0e87bc900ed684011d3dee8.png](https://pictr.com/images/2017/03/27/7d33d1fae0e87bc900ed684011d3dee8.png) 
 
+
+----------
 
 ### The final build
 Run next instruction and find your build inside dist folder.
