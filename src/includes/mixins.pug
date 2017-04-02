@@ -22,8 +22,8 @@ mixin tdbackground(params)
     - params.img = (params.img.toLowerCase().indexOf('http')+1) ? params.img : imagePath+params.img
     td(background=`${params.img ? params.img  :" "}` bgcolor=`${params.bgcolor ? params.bgcolor  :" "}` width=`${params.width ? params.width  :" "}` height=`${params.height ? params.height  :" "}` valign="top")&attributes(attributes)
         <!--[if gte mso 9]>
-        <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style=`width:#{params.width ? params.width  :" "}px;height:#{params.height ? params.height  :" "}px;`>
-        <v:fill type="tile" src=`#{params.img ? params.img  :" "}` color=`#{params.bgcolor ? params.bgcolor  :" "}` />
+        <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style='width:#{params.width ? params.width  :"0"}px;height:#{params.height ? params.height  :"0"}px;'>
+        <v:fill type="tile" src='#{params.img ? params.img  :" "}' color='#{params.bgcolor ? params.bgcolor  :" "}' />
         <v:textbox inset="0,0,0,0">
         <div>
         <![endif]-->
@@ -34,3 +34,15 @@ mixin tdbackground(params)
         </v:textbox>
         </v:rect>
         <![endif]-->
+//- params img, color,width,height, bgcolor, bordercolor, link, radius,font-family,font-size,font-weight, text, send by object literal
+//- +button({})  or +button({width:205, height:50, bgcolor:'green', radius:4})
+mixin button(params)
+    div
+        <!--[if mso]>
+        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href='#{params.link ? params.link  :"#"}' style='height:#{params.height ? params.height  :"40"}px;v-text-anchor:middle;width:#{params.width ? params.width  :"100"}px;' arcsize='#{params.radius ? (params.radius*10)  :"0"}%' strokecolor='#{params.bordercolor ? params.bordercolor :"gray"}' fill="t">
+        <v:fill type="tile" src='#{params.img ? params.img  :" "}' color='#{params.bgcolor ? params.bgcolor  :"gray"}' />
+        <w:anchorlock/>
+        <center style='color:#{params.color ? params.color:"white"};font-family:#{params.font-family ? params.font-family:"sans-serif"};font-size:#{params.font-size ? params.font-size:"13"}px;font-weight:#{params.font-weight ? params.font-weight:"bold"};'>#{params.text ? params.text:"Button"}</center>
+        </v:roundrect>
+        <![endif]-->
+        a(href=`${params.link ? params.link  :"#"}` style=`background-color:${params.bgcolor ? params.bgcolor  :"gray"};background-image:${ params.img ? "url('"+params.img+"')"  :"none"};border:1px solid ${params.bordercolor ? params.bordercolor :"gray"};border-radius:${params.radius ? (params.radius)  :"0"}px;color:${params.color ? params.color:"white"};display:inline-block;font-family:${params.font-family ? params.font-family:"sans-serif"};font-size:${params.font-size ? params.font-size:"13"}px;font-weight:${params.font-weight ? params.font-weight:"bold"};line-height:${params.height ? params.height  :"40"}px;text-align:center;text-decoration:none;width:${params.width ? params.width  :"100"}px;-webkit-text-size-adjust:none;mso-hide:all;`) #{params.text ? params.text:"Button"}
