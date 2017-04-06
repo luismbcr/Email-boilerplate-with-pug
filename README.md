@@ -41,6 +41,12 @@ table(**ownattributes**)&attributes(tableAtt)
 In case of testing, you could use [Netifly](https://app.netlify.com) to deploy the images, and update the imagePath here.
 ![](http://i.imgur.com/rmVOewV.png)
 
+In case you use googleAnalytics just set  a variable 
+```sh
+analytics = { url:"http://https://www.google-analytics.com/"}
+```
+
+
 ----------
 ### Mixins
 You could use mixins that consider the compatibility of all email clients, mixins are located in includes/mixins.pug

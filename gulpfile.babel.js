@@ -5,12 +5,15 @@ import pug from 'gulp-pug';
 import browserSync from 'browser-sync';
 import fs from 'fs';
 import del from 'del';
-
+const $ = require("gulp-load-plugins")({lazy: true});
+const config = require("./gulp.config")(args);
+const args = require("yargs").argv;
 const reload = browserSync.reload;
 
 gulp.task('images', ()=>{
-    return gulp.src('src/emails/**/img/*.{png,gif,jpg}')
-    .pipe(gulp.dest('dist/'))
+    return gulp.src(config.img.in)
+    .pipe($.imagemin())
+    .pipe(gulp.dest(config.img.out))
 });
 
 gulp.task('index',()=> {
@@ -33,14 +36,19 @@ gulp.task('clean',(cb)=>{
 gulp.task('server', ()=>{
     browserSync.init({
         server:{
-            baseDir: 'dist/'
+            baseDir: config.server.root
         }
     });
-    gulp.watch(['src/includes/*','src/includes/**/*','src/layout/*.pug','src/index.pug','src/emails/**/*.pug'],['pug','index']);
+    gulp.watch(['src/includes/*','src/includes/**/*','src/layout/*.pug','src/index.pug','src/emails/**/*.pug'],['pug','index'])
+    .on("change", (event) => {
+        config.helpers.changeMsg(event);
+    });
     gulp.watch('src/emails/**/img/*',{cwd:'./'},['images']);
     gulp.watch(['dist/*','dist/**/*']).on('change',reload);
 });
 
 gulp.task('build',['clean','index','images','pug']);
 
-gulp.task('default',['index','images','pug','server']);
+gulp.task('default',['index','images','pug','server'], () =>{
+    $.util.log($.util.colors.green("Project Start"));
+});

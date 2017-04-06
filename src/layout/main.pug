@@ -2,17 +2,23 @@ include ../includes/general.pug
 block variables
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 html
-    head
-        -var title = title || "Email template"
-        title #{title}
-        meta(http-equiv='Content-Type', content='text/html;', charset='utf-8')
-        meta(name='viewport', content='width=device-width, initial-scale=1')
-        meta(http-equiv='X-UA-Compatible', content='IE=edge')
-        style(type="text/css")
-            include ../includes/css/reset.css
-        block styles
-    body(style="margin:0; padding:0;" topmargin="0" leftmargin="0" marginheight="0" marginwidth="0")
-        table(width="100%" style=styleTable)&attributes(tableAtt)
-            tr
-                td&attributes(tdCenter)
-                    block content
+  head
+    -var title = title || "Email template"
+    //-var analytics = { url: "https://www.google-analytics.com/"}
+    - var fallback = "Helvetica, Arial, sans-serif !important";
+    title #{title}
+    meta(http-equiv='Content-Type', content='text/html;', charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name="format-detection", content="telephone=no")
+    style(type="text/css")
+      include:scss(outputStyle="compressed") ../includes/scss/boiler.scss
+    include ../includes/conditionals/main.pug
+    block styles
+  body(style="margin:0; padding:0;" topmargin="0" leftmargin="0" marginheight="0" marginwidth="0")
+    table(width="100%" style=styleTable)&attributes(tableAtt)
+      tr
+        td&attributes(tdCenter)
+          block content
+    if analytics
+      img(src=`${analytics.url}` style={ border: '0', margin: '0'})
