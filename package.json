@@ -1,15 +1,33 @@
 {
   "name": "email-generator",
   "version": "1.0.0",
-  "description": "",
+  "description": "Email Generator",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "gulp",
     "build": "gulp build"
   },
-  "author": "",
+   "keywords": [
+    "sass",
+    "pug",
+    "jade",
+    "emails",
+    "gulp"
+  ],
+  "author": "Luis Montero B",
+  "contributors": [{
+    "name": "Luis Padilla Moreno",
+    "email": "lpd1211@gmail.com"
+  }],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luismbcr/Email-boilerplate-with-pug"
+  },
   "license": "ISC",
+  "dependencies": {
+
+  },
   "devDependencies": {
     "babel-core": "^6.24.0",
     "babel-preset-es2015": "^6.24.0",
@@ -23,5 +41,6 @@
     "gulp-util": "^3.0.8",
     "jstransformer-scss": "^0.1.4",
     "yargs": "^7.0.2"
-  }
+  },
+  "engine": "node >= 6.4.0"
 }
