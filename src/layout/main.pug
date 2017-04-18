@@ -1,11 +1,12 @@
 include ../includes/general.pug
 block variables
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-html
+html(xmlns="http://www.w3.org/1999/xhtml")
   head
-    -var title = title || "Email template"
-    //-var analytics = { url: "https://www.google-analytics.com/"}
-    - var fallback = "Helvetica, Arial, sans-serif !important";
+    - var max_w = max_w || 600
+    - var title = title || "Email template"
+    - var fallback = fallback || "Arial, Helvetica, sans-serif";
+    - var externalFonts = externalFonts || ["https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i", "https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,700,700i"]
     title #{title}
     meta(http-equiv='Content-Type', content='text/html;', charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
@@ -13,12 +14,11 @@ html
     meta(name="format-detection", content="telephone=no")
     style(type="text/css")
       include:scss(outputStyle="compressed") ../includes/scss/boiler.scss
+      include:scss(outputStyle="compressed") ../includes/scss/utils.scss
+    include ../includes/conditionals/fonts.pug
     include ../includes/conditionals/main.pug
     block styles
-  body(style="margin:0; padding:0;" topmargin="0" leftmargin="0" marginheight="0" marginwidth="0")
-    table(width="100%" style=styleTable)&attributes(tableAtt)
-      tr
-        td&attributes(tdCenter)
-          block content
+  body(style=`margin:0; padding:0; font-family: ${fallback};` topmargin="0" leftmargin="0" marginheight="0" marginwidth="0")
+    block content
     if analytics
-      img(src=`${analytics.url}` style={ border: '0', margin: '0'})
+      img(src=analytics style={ border: '0', margin: '0'})

@@ -70,6 +70,13 @@ a[x-apple-data-detectors]{ // Force iOS devices to heed link styles set in CSS.
 @media only screen and (max-width: 600px) {
 
     /* global styles */
+
+    table[class="wrapper"] {
+      width: 100% !important;
+    }
+
+
+
     .hide{ display:none !important; display:none;}
     .blockwrap{ display:block !important; width:100% !important; }
     .showme{ display:block !important; width: auto !important; overflow: visible !important; float: none !important; max-height:inherit !important; max-width:inherit !important; line-height: auto !important; margin-top:0px !important; visibility:inherit !important;}

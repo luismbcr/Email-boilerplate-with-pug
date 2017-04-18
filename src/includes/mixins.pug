@@ -7,7 +7,8 @@ mixin addImg(src,alt)
     img(src=src alt=alt border="0" style=imgStyle)&attributes(attributes)
 
 mixin vSpacer(height)
-    td(width="10" height=height style=`font-size:0px; line-height:${height}px;mso-line-height-rule:exactly;`) &nbsp;
+  tr&attributes(attributes)
+    td(width="100%" height=height style=`font-size:0px; line-height:${height}px;mso-line-height-rule:exactly;`) &nbsp;
 
 mixin hSpacer(width)
     tr
@@ -46,3 +47,38 @@ mixin button(params)
         </v:roundrect>
         <![endif]-->
         a(href=`${params.link ? params.link  :"#"}` style=`background-color:${params.bgcolor ? params.bgcolor  :"gray"};background-image:${ params.img ? "url('"+params.img+"')"  :"none"};border:1px solid ${params.bordercolor ? params.bordercolor :"gray"};border-radius:${params.radius ? (params.radius)  :"0"}px;color:${params.color ? params.color:"white"};display:inline-block;font-family:${params.font-family ? params.font-family:"sans-serif"};font-size:${params.font-size ? params.font-size:"13"}px;font-weight:${params.font-weight ? params.font-weight:"bold"};line-height:${params.height ? params.height  :"40"}px;text-align:center;text-decoration:none;width:${params.width ? params.width  :"100"}px;-webkit-text-size-adjust:none;mso-hide:all;`) #{params.text ? params.text:"Button"}
+
+
+//- Receives number of columns
+mixin columns(columns)
+    - var num_rows = new Array(columns)
+    - var col_att = new Array(columns)
+    //- - var num_rows = new Array(columns).fill({})
+
+    mixin col(index)
+        - col_att[index] = attributes
+        - num_rows[index] = block;
+        //- - num_rows[index].body = block;
+    block
+
+    table&attributes(attributes)
+      tr
+        each tab,index in num_rows
+          td&attributes(col_att[index])
+            - tab && tab()
+
+//- Receives classes or boolean for hide and show
+mixin mobile_h_s(show,hide)
+  if show
+    <!--[if !mso]><!-->
+    div(style={display:"none"} class="show")
+      block show
+  <!--<![endif]-->
+  if hide
+    table(width="100%" border="0" cellpadding="0" cellspacing="0" align="center" style="margin:0 auto;" class="hide")
+      block hide
+
+//- you must pass number with dashes
+mixin tel_link(number, number_link, link_class = 'tel_link')
+  -var link = (number_link? number_link : number)
+  a(class=link_class href=`tel://${number}` target="_blank" style='color:#000;text-decoration:none;') #{link}
