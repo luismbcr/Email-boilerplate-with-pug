@@ -5,16 +5,19 @@ module.exports = function(args) {
 
     this.src = "/src/";
     this.dest = "./dist/";
+    this.index = `.${this.src}index.pug`;
+    this.email_src = `${this.src}emails/`;
+    this.pug_w = ['src/layout/*.pug','src/emails/**/*.pug']
 
     this.img = {
-      in: `.${this.src}emails/**/img/*.{png,gif,jpg}`,
+      in: `.${this.email_src}**/img/**/*.{png,gif,jpg}`,
       out: `${this.dest}`
     };
 
     this.server = {
       host: "localhost",
       port: "8001",
-      root: "dist/"
+      root: this.dest
     };
 
     this.helpers = {
