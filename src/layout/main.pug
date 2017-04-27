@@ -1,7 +1,7 @@
 include ../includes/general.pug
 block variables
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-html(xmlns="http://www.w3.org/1999/xhtml")
+html(xmlns="http://www.w3.org/1999/xhtml", xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office")
   head
     - var max_w = max_w || 600
     - var title = title || "Email template"
@@ -12,11 +12,13 @@ html(xmlns="http://www.w3.org/1999/xhtml")
     meta(name='viewport', content='width=device-width, initial-scale=1')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name="format-detection", content="telephone=no")
-    style(type="text/css")
-      include:scss(outputStyle="compressed") ../includes/scss/boiler.scss
-      include:scss(outputStyle="compressed") ../includes/scss/utils.scss
     include ../includes/conditionals/fonts.pug
-    include ../includes/conditionals/main.pug
+    include ../includes/conditionals/fonts_outlook_vml.pug
+    block conditionals
+    <link href="src/includes/css/reset.css" rel="stylesheet" data-embed >
+    //- style(type="text/css")
+    //-   include:scss(outputStyle="compressed") ../includes/scss/boiler.scss
+    //-   include:scss(outputStyle="compressed") ../includes/scss/utils.scss
     block styles
   body(style=`margin:0; padding:0; font-family: ${fallback};` topmargin="0" leftmargin="0" marginheight="0" marginwidth="0")
     block content

@@ -3,7 +3,6 @@ NEXT STEPS
 https://github.com/pugjs/pug/issues/2146
 https://www.npmjs.com/package/juice
 
-
 plugins vscode
 
 https://marketplace.visualstudio.com/items?itemName=spywhere.guides
