@@ -1,0 +1,22 @@
+{
+  "social_icons": [
+      {
+        "img": "icon-facebook.png",
+        "url": "#",
+        "width": "35",
+        "height": "29"
+      },
+      {
+        "img": "icon-twitter.png",
+        "url": "#",
+        "width": "35",
+        "height": "29"
+      },
+      {
+        "img": "icon-instagram.png",
+        "url": "#",
+        "width": "35",
+        "height": "29"
+      }
+    ]
+}

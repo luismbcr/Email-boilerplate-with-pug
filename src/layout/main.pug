@@ -20,7 +20,7 @@ html(xmlns="http://www.w3.org/1999/xhtml", xmlns:v="urn:schemas-microsoft-com:vm
     //-   include:scss(outputStyle="compressed") ../includes/scss/boiler.scss
     //-   include:scss(outputStyle="compressed") ../includes/scss/utils.scss
     block styles
-  body(style=`margin:0; padding:0; font-family: ${fallback};` topmargin="0" leftmargin="0" marginheight="0" marginwidth="0")
+  body(style=`margin:0!important; padding:0!important; font-family: ${fallback};` topmargin="0" leftmargin="0" marginheight="0" marginwidth="0")
     block content
     if analytics
       img(src=analytics style={ border: '0', margin: '0'})
