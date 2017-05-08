@@ -6,8 +6,10 @@ import browserSync from 'browser-sync';
 import fs from 'fs';
 import del from 'del';
 import path from 'path';
+var juice = require('@thasmo/gulp-juice');
 const $ = require("gulp-load-plugins")({lazy: true});
 const config = require("./gulp.config")(args);
+const htmlmin = require('gulp-html-minifier');
 const args = require("yargs").argv;
 const reload = browserSync.reload;
 
@@ -27,16 +29,37 @@ gulp.task('index',()=> {
     .pipe(reload({stream:true}))
 });
 
+gulp.task('inline',['pug'], function(){
+   return gulp.src("dist/**/index.html")
+        .pipe(juice({
+          includeResources:true,
+          removeStyleTags:false,
+          preserveMediaQueries: true,
+          webResources:{ links:true, scripts:false, images:false, relativeTo: "."}
+        }))
+        // .pipe($.rename(function(path){
+        //   path.basename+= "_inlined"
+        // }))
+        .pipe(gulp.dest("dist"))
+});
+
 gulp.task('pug', ()=>{
+    let c_path = "";
     return gulp.src(`.${config.email_src}**/index.pug`)
     .pipe($.data((file) => {
-      let c_path = path.relative(__dirname, path.dirname(file.path));
+      c_path = path.relative(__dirname, path.dirname(file.path));
       let data = `./${c_path}/data.json`;
       if(fs.existsSync(data)){
         return JSON.parse(fs.readFileSync(data));
       }
     }))
     .pipe(pug())
+    .pipe(juice({
+      includeResources:true,
+      removeStyleTags:false,
+      preserveMediaQueries: true,
+      webResources:{ links:true, scripts:false, images:false, relativeTo: "."}
+    }))
     .pipe(gulp.dest(config.dest))
     .pipe(reload({stream: true}))
 });
@@ -66,7 +89,30 @@ gulp.task('server', ()=>{
     .on("change", (event) => {
       reload()
     })
+    gulp.watch(`.${config.email_src}**/styles/*.{css,scss}`,['pug'])
+      .on("change", (event) => {
+        config.helpers.changeMsg(event);
+    })
     // gulp.watch(['dist/**/*']).on('change',reload); // meter el reload en cada task esto es un overheat
+});
+
+gulp.task('lint-css', function lintCssTask() {
+  return gulp
+    .src(`.${config.email_src}**/styles/*.{css,scss}`)
+    .pipe($.stylelint({
+      failAfterError: false,
+      reporters: [
+        {formatter: 'string', console: true}
+      ]
+    }));
+});
+
+gulp.task('deploy', () => {
+  return gulp.src("dist/**/index.html")
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe($.htmlhint({htmlhintrc: ".htmlhintrc"}))
+    .pipe($.htmlhint.reporter())
+    .pipe(gulp.dest(config.dest))
 });
 
 gulp.task('build',['clean','index','images','pug']);

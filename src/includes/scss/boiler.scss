@@ -75,8 +75,6 @@ a[x-apple-data-detectors]{ // Force iOS devices to heed link styles set in CSS.
       width: 100% !important;
     }
 
-
-
     .hide{ display:none !important; display:none;}
     .blockwrap{ display:block !important; width:100% !important; }
     .showme{ display:block !important; width: auto !important; overflow: visible !important; float: none !important; max-height:inherit !important; max-width:inherit !important; line-height: auto !important; margin-top:0px !important; visibility:inherit !important;}
@@ -91,6 +89,12 @@ a[x-apple-data-detectors]{ // Force iOS devices to heed link styles set in CSS.
 
 }
 
+body{
+  margin: 0!important;
+  padding:0 !important;
+  width:100%;
+  height:100%;
+}
 
 //resources https://gist.github.com/fcarneiro/8eb49f18d52790246a57
 // https://litmus.com/community/learning/13-foundations-email-coding-101

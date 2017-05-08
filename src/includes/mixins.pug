@@ -6,9 +6,9 @@ mixin addImg(src,alt)
     -var imgStyle = {'display': 'block', 'padding': '0', color:'#ffffff', 'font-family':'Helvetica, arial, sans-serif', 'font-size': '16px'}
     img(src=src alt=alt border="0" style=imgStyle)&attributes(attributes)
 
-mixin vSpacer(height)
+mixin vSpacer(height, width_p = "100%")
   tr&attributes(attributes)
-    td(width="100%" height=height style=`font-size:0px; line-height:${height}px;mso-line-height-rule:exactly;`) &nbsp;
+    td(width=width_p height=height style=`font-size:0px; line-height:${height}px;mso-line-height-rule:exactly;`) &nbsp;
 
 mixin hSpacer(width)
     tr
@@ -40,14 +40,17 @@ mixin tdbackground(params)
 mixin button(params)
     div
         <!--[if mso]>
-        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href='#{params.link ? params.link  :"#"}' style='height:#{params.height ? params.height  :"40"}px;v-text-anchor:middle;width:#{params.width ? params.width  :"100"}px;' arcsize='#{params.radius ? (params.radius*10)  :"0"}%' strokecolor='#{params.bordercolor ? params.bordercolor :"gray"}' fill="t">
-        <v:fill type="tile" src='#{params.img ? params.img  :" "}' color='#{params.bgcolor ? params.bgcolor  :"gray"}' />
-        <w:anchorlock/>
-        <center style='color:#{params.color ? params.color:"white"};font-family:#{params.font-family ? params.font-family:"sans-serif"};font-size:#{params.font-size ? params.font-size:"13"}px;font-weight:#{params.font-weight ? params.font-weight:"bold"};'>#{params.text ? params.text:"Button"}</center>
+        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href='#{params.link ? params.link  :"#"}' style='height:#{params.height ? params.height  :"40"}px;v-text-anchor:middle;width:#{params.width ? params.width  :"100"}px;' arcsize='#{params.radius ? (params.radius*10)  :"0"}%' strokecolor='#{params.bordercolor ? params.bordercolor :"gray"}' fillcolor='#{params.bgcolor ? params.bgcolor  :"gray"}'>
+          <w:anchorlock/>
+          <center style='color:#{params.color ? params.color:"white"};font-family:#{params.font_family ? params.font_family:"Arial, sans-serif"};font-size:#{params.font-size ? params.font-size:"13"}px;font-weight:#{params.font-weight ? params.font-weight:"bold"};'>#{params.text ? params.text:"Button"}</center>
         </v:roundrect>
         <![endif]-->
-        a(href=`${params.link ? params.link  :"#"}` style=`background-color:${params.bgcolor ? params.bgcolor  :"gray"};background-image:${ params.img ? "url('"+params.img+"')"  :"none"};border:1px solid ${params.bordercolor ? params.bordercolor :"gray"};border-radius:${params.radius ? (params.radius)  :"0"}px;color:${params.color ? params.color:"white"};display:inline-block;font-family:${params.font-family ? params.font-family:"sans-serif"};font-size:${params.font-size ? params.font-size:"13"}px;font-weight:${params.font-weight ? params.font-weight:"bold"};line-height:${params.height ? params.height  :"40"}px;text-align:center;text-decoration:none;width:${params.width ? params.width  :"100"}px;-webkit-text-size-adjust:none;mso-hide:all;`) #{params.text ? params.text:"Button"}
+        a(href=`${params.link ? params.link  :"#"}` target=`${params.target ? params.target  :"_blank"}` style=`background-color:${params.bgcolor ? params.bgcolor  :"gray"};background-image:${ params.img ? "url('"+params.img+"')"  :"none"};border:1px solid ${params.bordercolor ? params.bordercolor :"gray"};border-radius:${params.radius ? (params.radius)  :"0"}px;color:${params.color ? params.color:"white"};display:inline-block;font-family:${params.font_family ? params.font_family:"Arial, sans-serif"};font-size:${params.font-size ? params.font-size:"13"}px;font-weight:${params.font-weight ? params.font-weight:"bold"};line-height:${params.height ? params.height  :"40"}px;text-align:center;text-decoration:none;width:${params.width ? params.width  :"100"}px;-webkit-text-size-adjust:none;mso-hide:all;`)&attributes(attributes) #{params.text ? params.text:"Button"}
 
+
+//-Receives vertical alignment, symbol and attributes, classes
+mixin bullet(v_align="top", symbol="•")
+  td(valign=v_align)&attributes(attributes) #{symbol}
 
 //- Receives number of columns
 mixin columns(columns)
@@ -60,7 +63,6 @@ mixin columns(columns)
         - num_rows[index] = block;
         //- - num_rows[index].body = block;
     block
-
     table&attributes(attributes)
       tr
         each tab,index in num_rows

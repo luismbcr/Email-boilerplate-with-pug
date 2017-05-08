@@ -15,20 +15,21 @@
     "emails",
     "gulp"
   ],
-  "author": "Luis Montero B",
+  "author": "Luis Padilla Moreno",
   "contributors": [
     {
-      "name": "Luis Padilla Moreno",
-      "email": "lpd1211@gmail.com"
+      "name": "Luis Montero Barquero",
+      "email": "luismbcr@gmail.com"
     }
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/luismbcr/Email-boilerplate-with-pug"
+    "url": "https://github.com/LuisPadillaM/Email-boilerplate-with-pug"
   },
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
+    "@thasmo/gulp-juice": "^0.2.0",
     "babel-core": "^6.24.0",
     "babel-preset-es2015": "^6.24.0",
     "browser-sync": "^2.18.8",
@@ -37,15 +38,21 @@
     "fs": "0.0.1-security",
     "gulp": "^3.9.1",
     "gulp-data": "^1.2.1",
+    "gulp-html-minifier": "^0.1.8",
+    "gulp-htmlhint": "^0.3.1",
     "gulp-imagemin": "^3.2.0",
+    "gulp-juice": "^0.1.0",
     "gulp-livereload": "^3.8.1",
     "gulp-load-plugins": "^1.5.0",
     "gulp-pug": "^3.3.0",
+    "gulp-rename": "^1.2.2",
     "gulp-stylelint": "^3.9.0",
     "gulp-util": "^3.0.8",
     "jstransformer-clean-css": "^2.0.0",
     "jstransformer-scss": "^0.1.4",
     "pug-lint": "^2.4.0",
+    "stylelint": "^7.10.1",
+    "stylelint-scss": "^1.4.4",
     "yargs": "^7.0.2"
   },
   "engine": "node >= 6.4.0"

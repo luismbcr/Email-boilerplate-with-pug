@@ -1,25 +1,38 @@
-/* hacks */
-* { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; max-height:1000000px;}
-table {border-collapse: collapse !important;}
-#outlook a {padding:0;}
-.ReadMsgBody { width: 100%; }
+/* CLIENT-SPECIFIC RESETS */
 .ExternalClass { width: 100%; }
 .ExternalClass * { line-height: 100%; }
-.ios_geo a { color:#1c1c1c !important; text-decoration:none !important; }
-/* responsive styles */
-@media only screen and (max-width: 600px) { 
 
-    /* global styles */
-    .hide{ display:none !important; display:none;}
-    .blockwrap{ display:block !important; width:100% !important; }
-    .showme{ display:block !important; width: auto !important; overflow: visible !important; float: none !important; max-height:inherit !important; max-width:inherit !important; line-height: auto !important; margin-top:0px !important; visibility:inherit !important;}
-    *[class].movedown{ display: table-footer-group !important;}
-    *[class].moveup{ display: table-header-group !important; }
-    
-    /* font styles */
-    *[class].textright{ text-align: right !important; }
-    *[class].textleft{ text-align: left !important; }
-    *[class].textcenter{ text-align: center !important; }
-    *[class].font27{ font-size: 27px !important; font-weight:normal !important; line-height:27px !important; }
-    
+body, table, td, a{-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;}
+table, td{mso-table-lspace: 0pt; mso-table-rspace: 0pt;}
+img { -ms-interpolation-mode: bicubic; }
+
+
+/* RESET STYLES */
+img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+table { border-collapse: collapse !important; }
+body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+
+/* GENERAL STYLE RESETS */
+td {border-collapse: collapse !important;}
+#outlook a {padding: 0;}
+.ReadMsgBody { width: 100%; }
+
+/* iOS BLUE LINKS */
+a[x-apple-data-detectors] {
+  color: inherit !important;
+  text-decoration: none !important;
+  font-size: inherit !important;
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+}
+
+/* fix tooltip download in gmail*/
+
+img + div {
+  display: none !important;
+}
+
+img + div > div {
+  display: none !important;
 }

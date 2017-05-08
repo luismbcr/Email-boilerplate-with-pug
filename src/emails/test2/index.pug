@@ -1,0 +1,106 @@
+extends ../../layout/main.pug
+
+block variables
+  -var fallback = "Open Sans, Helvetica, Arial, sans-serif"
+  -var title = "Email Template"
+  -var white = "#ffffff"
+  -var max_w = 600
+  -var mob = 480
+  -var img_path = "./img/"
+  -var bg_color= "#eeeeee"
+  -var externalFonts = []
+block conditionals
+block styles
+  style(type="text/css")
+    include:scss(outputStyle="compressed") ./styles/inline.scss
+    include:clean-css ./styles/index.css
+
+block content
+  //- body(style="background-color: #eeeeee;" bgcolor="#eeeeee")
+
+  //HIDDEN PREHEADER TEXT
+  div(style=`display: none!important;mso-hide:all; font-size: 1px; color: #fefefe; line-height: 1px; font-family: ${fallback}; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;`).
+    Enjoy the awesome experience of creating your own emails with this tool
+
+  // CONTAINER TABLE
+  table(width="100%")&attributes(tableAtt)
+    tr
+      td(align="center" style=`background-color: ${bg_color};` bgcolor=bg_color)
+        //  WRAPPER TABLE
+        table(align="center" width=max_w class="mobile-table")&attributes(tableAtt)
+                tr
+                  td(align="center" valign="top" style="font-size:0; padding: 35px;" bgcolor="#044767")
+                    table(align="left" width="250" class="mobile-table")&attributes(tableAtt)
+                      tr
+                        td(align="left" valign="top" style=`font-family: ${fallback}; font-size:30px; line-height: 48px;` class="mobile-center f_bold")
+                          h1( class="white f_bold" style="font-size: 30px; margin: 0;").
+                            Email_template
+                    table(align="right" width="250" class="mobile-hide")&attributes(tableAtt)
+                      tr
+                        td(class="f_normal" align="right" valign="top" style=`font-family: ${fallback}; font-size: 48px; line-height: 48px;`)
+                          table(align="right")&attributes(tableAtt)
+                            tr
+                              td(class="f_normal" style=`font-family: ${fallback}; font-size: 18px; `)
+                                p(class="white f_normal" style="font-size: 18px;  margin: 0;")
+                                  a(href="#" target="_blank" class="white" style="text-decoration: none;").
+                                    contribute &nbsp;
+                              td(class="f_normal" style=`font-family: ${fallback}; font-size: 18px; line-height: 24px;`)
+                                a(href="#" target="_blank" class="white" style="text-decoration: none;")
+                                  img(src=img_path+"shop.png" width="27" height="23" style="display: block; border: 0px;")
+                tr
+                  td(align="center" style="padding: 35px; background-color: #ffffff;" bgcolor=white)
+                    table(align="center" width="100%")&attributes(tableAtt)
+                      tr
+                        td(align="center")
+                          img(src=img_path+"hero-image-feedback.png" width="120" height="96")
+                      tr
+                        td(align="center" class="f_normal" style=`font-family: ${fallback}; font-size: 16px; line-height: 24px; padding-top: 25px; padding-bottom: 15px; border-bottom: 3px solid #eeeeee;`)
+                          h2(class="f_bold" style="font-size: 30px; line-height: 36px; color: #333333; margin: 0;").
+                            Tell Us What You Think in 5 Minutes or Less
+                          p(class="f_normal" style="font-size: 16px; line-height: 24px; color: #777777;").
+                            #{comments[0]}
+                      tr
+                        td(align="center" style="padding: 35px 0 15px 0;")
+                          table&attributes(tableAtt)
+                            tr
+                              //- +button({bgcolor:'#ed8e20', radius:5, link: "#", font_family: fallback, text: "Offer Feedback"})(style=`font-size: 18px; text-decoration: none;  background-color: #ed8e20; padding: 15px 30px; border: 1px solid #ed8e20; display: block;`)
+                              td(align="center" style="border-radius: 5px;" bgcolor="#ed8e20")
+                                a(href="#" target="_blank" class="white" style=`font-size: 18px; font-family: ${fallback}; text-decoration: none; border-radius: 5px; background-color: #ed8e20; padding: 15px 30px; border: 1px solid #ed8e20; display: block;`).
+                                  Offer Feedback
+                      tr
+                        td(align="center" class="f_normal" style=`font-family: ${fallback}; font-size: 18px; line-height: 24px;`)
+                          p(class="f_bold" style="font-size: 18px; line-height: 24px; color: #333333;") Thank you, for trying it
+                          p(class="f_normal" style="font-size: 16px; line-height: 24px; color: #777777;").
+                           #{comments[1]}
+                tr
+                  td(align="center" style="background-color: #ffffff;" bgcolor=white)
+                    img(src=img_path+"arrow-up.png" width="46" height="22" style="display: block; border: 0px;")
+                tr
+                  td(align="center" style=" padding: 35px; background-color: #1b9ba3; border-bottom: 20px solid #48afb5;" bgcolor="#1b9ba3")
+                    table(align="center" width="100%")&attributes(tableAtt)
+                      tr
+                        td(align="center")
+                          table
+                            tr
+                              each icon in social_icons
+                                td(style="padding: 0 10px;")
+                                 a(href=icon.url target="_blank")
+                                  img(src=img_path+icon.img width=icon.width height=icon.height style="display: block; border: 0px;")
+                              td(class="f_normal" style=`font-family: ${fallback}; font-size: 20px; line-height: 24px; padding: 0 10px;`)
+                                a(href="#" target="_blank" class="white" style="text-decoration: none;") BLOG
+
+                tr
+                  td(align="center" style="padding: 35px; background-color: #ffffff;" bgcolor=white)
+                    table(align="center" width="100%")&attributes(tableAtt)
+                      tr
+                        td(align="center")
+                          img(src=img_path+"logo-footer.png" width="37" height="37" style="display: block; border: 0px;")
+                      tr
+                        td(class="f_normal" align="center" style=`font-family: ${fallback}; font-size: 14px; line-height: 24px; padding: 5px 0 10px 0;`)
+                          p(class="f_bold" style="font-size: 14px; line-height: 18px; color: #333333;").
+                            Plaza Victoria Avenue 1#[br]
+                            Heredia, CR 40101
+                      tr
+                        td(align="left" class="f_normal" style=`font-family: ${fallback}; font-size: 14px; line-height: 24px;`)
+                          p(class="f_normal" style="font-size: 14px; line-height: 20px; color: #777777;").
+                            If you didn't create an account using this email address, please ignore this email or #[a(href="#" target="_blank" style="color: #777777;") unsusbscribe].
