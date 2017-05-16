@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 const $ = require("gulp-load-plugins")({lazy: true});
 
 module.exports = function(args) {
@@ -24,6 +26,12 @@ module.exports = function(args) {
         changeMsg: function(event){
             const srcPatter = new RegExp(`/.*(?=${config.src.replace("/\//g", "\/")})/`);
             $.util.log(`File ${ $.util.colors.blue(event.path.replace(srcPatter, "")) }  ${ event.type }`);
+        },
+        getFolders: function(dirname){
+          return fs.readdirSync(dirname)
+          .filter(function(file) {
+              return fs.statSync(path.join(dirname, file)).isDirectory();
+          });
         }
     }
   }

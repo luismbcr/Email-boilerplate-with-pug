@@ -19,8 +19,9 @@ gulp.task('images', ()=>{
     .pipe(gulp.dest(config.img.out))
 });
 
+
 gulp.task('index',()=> {
-    let dirs = fs.readdirSync('.'+config.email_src);
+    let dirs = config.helpers.getFolders('.'+config.email_src);
     return gulp.src(config.index)
     .pipe(pug({
         locals: {links: dirs}
