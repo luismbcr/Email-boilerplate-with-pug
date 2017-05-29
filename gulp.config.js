@@ -10,6 +10,7 @@ module.exports = function(args) {
     this.index = `.${this.src}index.pug`;
     this.email_src = `${this.src}emails/`;
     this.pug_w = ['src/layout/*.pug','src/emails/**/*.pug']
+    this.zip_path = "./dist"
 
     this.img = {
       in: `.${this.email_src}**/img/**/*.{png,gif,jpg}`,
