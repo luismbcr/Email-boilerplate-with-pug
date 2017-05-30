@@ -27,9 +27,6 @@
     "url": "https://github.com/LuisPadillaM/Email-boilerplate-with-pug"
   },
   "license": "ISC",
-  "dependencies": {
-    "vinyl-ftp": "^0.6.0"
-  },
   "devDependencies": {
     "@thasmo/gulp-juice": "^0.2.0",
     "babel-core": "^6.24.0",
@@ -56,6 +53,7 @@
     "run-sequence": "^1.2.2",
     "stylelint": "^7.10.1",
     "stylelint-scss": "^1.4.4",
+    "vinyl-ftp": "^0.6.0",
     "yargs": "^7.0.2"
   },
   "engine": "node >= 6.4.0"
