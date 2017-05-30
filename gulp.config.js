@@ -14,6 +14,9 @@ module.exports = function(args) {
     this.pkg_json = JSON.parse(fs.readFileSync(`${__dirname}/package.json`, 'utf8'));
     this.remote_conf = `${__dirname}/.ftppass`;
     this.remote_d = (fs.existsSync(this.remote_conf)) ? JSON.parse(fs.readFileSync(this.remote_conf, 'utf8')) : null;
+    this.ftp_info = this.remote_d.ftp;
+    this.email_d = this.remote_d.email;
+
     this.img = {
       in: `.${this.email_src}**/img/**/*.{png,gif,jpg}`,
       out: `${this.dest}`
@@ -21,22 +24,20 @@ module.exports = function(args) {
 
     this.ftp = (this.remote_d) ? {
             //default title is set to same name as package.json
-            projectTitle: this.pkg_json.name,
+            stagingFolder: this.ftp_info.remotePath + this.pkg_json.name,
+            host: this.ftp_info.host,
+            port: this.ftp_info.port,
+            user: this.ftp_info.user,
+            pass: this.ftp_info.pass,
 
-            //query string that will be added to all hrefs
-            queryString: '',
+    } : null;
 
-            //staging server
-            stagingDomain: this.remote_d.domain,
-            stagingFolder: this.remote_d.remotePath + this.pkg_json.name,
-            ftpHost: this.remote_d.host,
-            ftpPort: this.remote_d.port,
-
+    this.email = (this.remote_d) ? {
             //send-mail credentials
-            mailType: this.remote_d.mailType,
-            mailService: this.remote_d.mailService,
-            mailUsername: this.remote_d.user,
-            mailPassword: this.remote_d.pass
+            mailType: this.email_d.mailType,
+            mailService: this.email_d.mailService,
+            mailUsername: this.email_d.user,
+            mailPassword: this.email_d.pass
     } : null;
 
     this.server = {
