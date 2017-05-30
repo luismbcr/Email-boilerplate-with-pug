@@ -1,6 +1,8 @@
 #ignore dist folder
 dist/
 src/emails/AFBU17DDBH5466 Afinitor DMD Email Swish
+#ignore remote config file
+.ftppass
 
 ### macOS ###
 *.DS_Store
@@ -117,5 +119,3 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
-# End of https://www.gitignore.io/api/node,macos,windows,visualstudiocode

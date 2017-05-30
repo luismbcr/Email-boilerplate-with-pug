@@ -10,6 +10,7 @@ var juice = require('@thasmo/gulp-juice');
 const $ = require("gulp-load-plugins")({lazy: true});
 const config = require("./gulp.config")(args);
 const htmlmin = require('gulp-html-minifier');
+const runSequence = require('run-sequence');
 const args = require("yargs").argv;
 const reload = browserSync.reload;
 
@@ -108,6 +109,19 @@ gulp.task('lint-css', function lintCssTask() {
     }));
 });
 
+//zip email
+gulp.task('zip', ["deploy"], () => {
+
+   let dirs = config.helpers.getFolders('.'+config.email_src);
+
+    return dirs.map((folder) => {
+        let f_path = path.join(config.zip_path, folder, '**/*');
+        return gulp.src(f_path)
+            .pipe($.zip(`${folder}.zip`))
+            .pipe(gulp.dest(`${config.zip_path}/zips`));
+    });
+});
+
 gulp.task('deploy', () => {
   return gulp.src("dist/**/index.html")
     .pipe(htmlmin({collapseWhitespace: true}))
@@ -118,6 +132,7 @@ gulp.task('deploy', () => {
 
 gulp.task('build',['clean','index','images','pug']);
 
-gulp.task('default',['index','images','pug','server'], () =>{
+gulp.task('default', () =>{
+    runSequence('index','images','pug','server');
     $.util.log($.util.colors.green("Project Start"));
 });

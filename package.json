@@ -48,6 +48,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-stylelint": "^3.9.0",
     "gulp-util": "^3.0.8",
+    "gulp-zip": "^4.0.0",
     "jstransformer-clean-css": "^2.0.0",
     "jstransformer-scss": "^0.1.4",
     "pug-lint": "^2.4.0",
