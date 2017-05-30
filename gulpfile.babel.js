@@ -12,6 +12,7 @@ const config = require("./gulp.config")(args);
 const htmlmin = require('gulp-html-minifier');
 const runSequence = require('run-sequence');
 const args = require("yargs").argv;
+const ftp = require("vinyl-ftp");
 const reload = browserSync.reload;
 
 gulp.task('images', ()=>{
@@ -39,9 +40,6 @@ gulp.task('inline',['pug'], function(){
           preserveMediaQueries: true,
           webResources:{ links:true, scripts:false, images:false, relativeTo: "."}
         }))
-        // .pipe($.rename(function(path){
-        //   path.basename+= "_inlined"
-        // }))
         .pipe(gulp.dest("dist"))
 });
 
@@ -95,10 +93,9 @@ gulp.task('server', ()=>{
       .on("change", (event) => {
         config.helpers.changeMsg(event);
     })
-    // gulp.watch(['dist/**/*']).on('change',reload); // meter el reload en cada task esto es un overheat
 });
 
-gulp.task('lint-css', function lintCssTask() {
+gulp.task('lint-css', () => {
   return gulp
     .src(`.${config.email_src}**/styles/*.{css,scss}`)
     .pipe($.stylelint({
@@ -109,7 +106,25 @@ gulp.task('lint-css', function lintCssTask() {
     }));
 });
 
-//zip email
+
+//FTP
+gulp.task('ftp', ["deploy"], () => {
+
+    let conn = ftp.create( {
+      host:     config.ftp.host,
+      user:     config.ftp.user,
+      password: config.ftp.pass,
+      parallel: 10,
+      log:      gutil.log,
+      secure: true
+  } );
+
+  return gulp.src( globs, { base: config.dest, buffer: false } )
+    .pipe( conn.newer( config.ftp.stagingFolder ) ) // only upload newer files
+    .pipe( conn.dest( config.ftp.stagingFolder ) );
+});
+
+//ZIP email
 gulp.task('zip', ["deploy"], () => {
 
    let dirs = config.helpers.getFolders('.'+config.email_src);
