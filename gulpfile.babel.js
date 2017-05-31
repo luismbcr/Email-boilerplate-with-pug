@@ -10,7 +10,9 @@ var juice = require('@thasmo/gulp-juice');
 const $ = require("gulp-load-plugins")({lazy: true});
 const config = require("./gulp.config")(args);
 const htmlmin = require('gulp-html-minifier');
+const runSequence = require('run-sequence');
 const args = require("yargs").argv;
+const ftp = require("vinyl-ftp");
 const reload = browserSync.reload;
 
 gulp.task('images', ()=>{
@@ -19,8 +21,9 @@ gulp.task('images', ()=>{
     .pipe(gulp.dest(config.img.out))
 });
 
+
 gulp.task('index',()=> {
-    let dirs = fs.readdirSync('.'+config.email_src);
+    let dirs = config.helpers.getFolders('.'+config.email_src);
     return gulp.src(config.index)
     .pipe(pug({
         locals: {links: dirs}
@@ -37,9 +40,6 @@ gulp.task('inline',['pug'], function(){
           preserveMediaQueries: true,
           webResources:{ links:true, scripts:false, images:false, relativeTo: "."}
         }))
-        // .pipe($.rename(function(path){
-        //   path.basename+= "_inlined"
-        // }))
         .pipe(gulp.dest("dist"))
 });
 
@@ -93,10 +93,9 @@ gulp.task('server', ()=>{
       .on("change", (event) => {
         config.helpers.changeMsg(event);
     })
-    // gulp.watch(['dist/**/*']).on('change',reload); // meter el reload en cada task esto es un overheat
 });
 
-gulp.task('lint-css', function lintCssTask() {
+gulp.task('lint-css', () => {
   return gulp
     .src(`.${config.email_src}**/styles/*.{css,scss}`)
     .pipe($.stylelint({
@@ -105,6 +104,37 @@ gulp.task('lint-css', function lintCssTask() {
         {formatter: 'string', console: true}
       ]
     }));
+});
+
+
+//FTP
+gulp.task('ftp', ["deploy"], () => {
+
+    let conn = ftp.create( {
+      host:     config.ftp.host,
+      user:     config.ftp.user,
+      password: config.ftp.pass,
+      parallel: 10,
+      log:      gutil.log,
+      secure: true
+  } );
+
+  return gulp.src( globs, { base: config.dest, buffer: false } )
+    .pipe( conn.newer( config.ftp.stagingFolder ) ) // only upload newer files
+    .pipe( conn.dest( config.ftp.stagingFolder ) );
+});
+
+//ZIP email
+gulp.task('zip', ["deploy"], () => {
+
+   let dirs = config.helpers.getFolders('.'+config.email_src);
+
+    return dirs.map((folder) => {
+        let f_path = path.join(config.zip_path, folder, '**/*');
+        return gulp.src(f_path)
+            .pipe($.zip(`${folder}.zip`))
+            .pipe(gulp.dest(`${config.zip_path}/zips`));
+    });
 });
 
 gulp.task('deploy', () => {
@@ -117,6 +147,7 @@ gulp.task('deploy', () => {
 
 gulp.task('build',['clean','index','images','pug']);
 
-gulp.task('default',['index','images','pug','server'], () =>{
+gulp.task('default', () =>{
+    runSequence('index','images','pug','server');
     $.util.log($.util.colors.green("Project Start"));
 });
