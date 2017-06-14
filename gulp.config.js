@@ -14,8 +14,8 @@ module.exports = function(args) {
     this.pkg_json = JSON.parse(fs.readFileSync(`${__dirname}/package.json`, 'utf8'));
     this.remote_conf = `${__dirname}/.ftppass`;
     this.remote_d = (fs.existsSync(this.remote_conf)) ? JSON.parse(fs.readFileSync(this.remote_conf, 'utf8')) : null;
-    this.ftp_info = this.remote_d.ftp;
-    this.email_d = this.remote_d.email;
+    this.ftp_info = (this.remote_d) ? this.remote_d.ftp : null;
+    this.email_d = (this.remote_d) ? this.remote_d.email : null;
 
     this.img = {
       in: `.${this.email_src}**/img/**/*.{png,gif,jpg}`,
