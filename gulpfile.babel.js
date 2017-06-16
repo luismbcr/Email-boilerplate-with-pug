@@ -53,7 +53,7 @@ gulp.task('pug', ()=>{
         return JSON.parse(fs.readFileSync(data));
       }
     }))
-    .pipe(pug())
+    .pipe(pug({basedir: "src"}))
     .pipe(juice({
       includeResources:true,
       removeStyleTags:false,
