@@ -36,17 +36,63 @@ mixin tdbackground(params)
         </v:rect>
         <![endif]-->
 //- params img, color,width,height, bgcolor, bordercolor, link, radius,font-family,font-size,font-weight, text, send by object literal
-//- +button({})  or +button({width:205, height:50, bgcolor:'green', radius:4})
+//- +button({})  or +button({width:205, height:40, bgcolor:'green', radius:4})
 mixin button(params)
-    div
-        <!--[if mso]>
-        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href='#{params.link ? params.link  :"#"}' style='height:#{params.height ? params.height  :"40"}px;v-text-anchor:middle;width:#{params.width ? params.width  :"100"}px;' arcsize='#{params.radius ? (params.radius*10)  :"0"}%' strokecolor='#{params.bordercolor ? params.bordercolor :"gray"}' fillcolor='#{params.bgcolor ? params.bgcolor  :"gray"}'>
-          <w:anchorlock/>
-          <center style='color:#{params.color ? params.color:"white"};font-family:#{params.font_family ? params.font_family:"Arial, sans-serif"};font-size:#{params.font-size ? params.font-size:"13"}px;font-weight:#{params.font-weight ? params.font-weight:"bold"};'>#{params.text ? params.text:"Button"}</center>
-        </v:roundrect>
-        <![endif]-->
-        a(href=`${params.link ? params.link  :"#"}` target=`${params.target ? params.target  :"_blank"}` style=`background-color:${params.bgcolor ? params.bgcolor  :"gray"};background-image:${ params.img ? "url('"+params.img+"')"  :"none"};border:1px solid ${params.bordercolor ? params.bordercolor :"gray"};border-radius:${params.radius ? (params.radius)  :"0"}px;color:${params.color ? params.color:"white"};display:inline-block;font-family:${params.font_family ? params.font_family:"Arial, sans-serif"};font-size:${params.font-size ? params.font-size:"13"}px;font-weight:${params.font-weight ? params.font-weight:"bold"};line-height:${params.height ? params.height  :"40"}px;text-align:center;text-decoration:none;width:${params.width ? params.width  :"100"}px;-webkit-text-size-adjust:none;mso-hide:all;`)&attributes(attributes) #{params.text ? params.text:"Button"}
 
+    -var bgColor = `background-color:${params.bgcolor? params.bgcolor:"gray"};`;
+    -var bg_img = `${ params.img? `background-image:url(${params.img});`:""}`;
+    -var border = params.bordercolor ? `border:1px solid ${params.bordercolor};`:"";
+    -var color = `color:${params.color? params.color:"white"};`;
+    -var fill = `${params.img ? "fill='t'":`fillcolor='${params.bgcolor}'`}`
+    -var font_family = `font-family:${params.font_family? params.font_family:"Arial, sans-serif"};`;
+    -var font_size = `font-size:${params.font_size? params.font_size:"13"}px;`;
+    -var font_weight = `font-weight:${params.font_weight?params.font_weight:"bold"};`;
+    -var text= params.text ? params.text:"Button";
+    -var text_hide = (params.img || params.bordercolor)?"mso-hide:all;":""
+    -var height= `${params.height ? params.height:"40"}px;`;
+    -var link = params.link ? params.link:"#"
+    -var stroke = params.bordercolor ? `strokecolor='${params.bordercolor}'` : "stroke='f'"
+    -var width= `width:${params.width ? params.width :"100"}px;`;
+
+    div
+        if params.radius
+          <!--[if mso]>
+          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="#{link}" style='height:#{height}v-text-anchor:middle;#{width}' arcsize='#{Math.ceil((params.radius/params.height)*100)}%' #{stroke} #{fill}>
+          if params.img
+            <v:fill type="tile" src="#{params.img}" color="#{params.bgcolor}" />
+          <w:anchorlock/>
+          if (params.bordercolor || params.img)
+            <center style='#{color} #{font_family} #{font_size} #{font_weight}'>#{text}</center>
+            </v:roundrect>
+            <![endif]-->
+            a(href=link style=`${bgColor}${bg_img}${color}display:inline-block;${font_family}${font_size}${font_weight}border-radius:${params.radius}px;${border}line-height:${height}text-align:center;text-decoration:none;${width}-webkit-text-size-adjust:none;${text_hide}`) #{text}
+          else
+            <center>
+            <![endif]-->
+              a(href=link style=`${bgColor}${color}display:inline-block;${font_family}${font_size}${font_weight}border-radius:${params.radius}px;line-height:${height}text-align:center;text-decoration:none;${width}-webkit-text-size-adjust:none;${text_hide}`) #{text}
+            <!--[if mso]>
+            </center>
+            </v:roundrect>
+            <![endif]-->
+        else
+          <!--[if mso]>
+          <v:rect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="#{link}" style='height:#{height}v-text-anchor:middle;#{width}' #{stroke} #{fill}>
+          if params.img
+            <v:fill type="tile" src="#{params.img}" color="#{params.bgcolor}" />
+          <w:anchorlock/>
+          if (params.bordercolor || params.img)
+            <center style='#{color}#{font_family}#{font_size}#{font_weight}'>#{text}</center>
+            </v:rect>
+            <![endif]-->
+            a(href=link style=`${bgColor}${bg_img}${color}display:inline-block;${font_family}${font_size}${font_weight}${border}line-height:${height}text-align:center;text-decoration:none;${width}-webkit-text-size-adjust:none;${text_hide}`) #{text}
+          else
+            <center>
+            <![endif]-->
+              a(href=link style=`${bgColor}${color}display:inline-block;${font_family}${font_size}${font_weight}line-height:${height}text-align:center;text-decoration:none;${width}-webkit-text-size-adjust:none;${text_hide}`) #{text}
+            <!--[if mso]>
+            </center>
+            </v:rect>
+            <![endif]-->
 
 //-Receives vertical alignment, symbol and attributes, classes
 mixin bullet(v_align="top", symbol="•")

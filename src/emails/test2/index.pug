@@ -2,6 +2,7 @@ extends ../../layout/main.pug
 
 block variables
   -var fallback = "Open Sans, Helvetica, Arial, sans-serif"
+  -var preheader = "Data on prophylactic use of mouthwash for stomatitis"
   -var title = "Email Template"
   -var white = "#ffffff"
   -var max_w = 600
@@ -18,9 +19,7 @@ block styles
 block content
   //- body(style="background-color: #eeeeee;" bgcolor="#eeeeee")
 
-  //HIDDEN PREHEADER TEXT
-  div(style=`display: none!important;mso-hide:all; font-size: 1px; color: #fefefe; line-height: 1px; font-family: ${fallback}; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;`).
-    Enjoy the awesome experience of creating your own emails with this tool
+  include /includes/modules/preheader.pug
 
   // CONTAINER TABLE
   table(width="100%")&attributes(tableAtt)

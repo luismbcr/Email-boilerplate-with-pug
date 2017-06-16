@@ -18,9 +18,9 @@ $ npm start
  
  - Create new folder inside src/emails with project name
  - Create the index.pug file and extend from desired layout.
+ - Create your img, styles, and components folders
+ - You can optionally create a data.json to store your data
  
-
-
 ----------
 
 
@@ -97,9 +97,27 @@ This mixin takes advantage of alt text, and applies to alt text some styles, thi
 
 ----------
 ### Modularization
-You could develop modules inside includes/modules.
+You could develop global modules inside includes/modules.
 **Example in emails folder:**
 ![7d33d1fae0e87bc900ed684011d3dee8.png](https://pictr.com/images/2017/03/27/7d33d1fae0e87bc900ed684011d3dee8.png) 
+
+Or you can also create your components in every mail folder and use them to modularize your code
+
+### Gulp tasks
+
+You can modify gulp.config.js with custom locations, and folder
+names.
+The gulpfile.babel.js file provides different task commands using your commandline tool.  
+
+#### Tasks
+
+##### Development Tasks
+- **$ gulp** - Runs gulp default task, start server, and scaffold tasks 
+
+##### Deploy Tasks
+- **$ gulp deploy** - Minify html in 'dist' folder  
+- **$ gulp zip** - zip every email in dist folder and store 
+them under zip folder in dist location
 
 
 ----------
